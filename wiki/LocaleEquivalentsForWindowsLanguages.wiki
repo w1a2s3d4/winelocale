@@ -1,0 +1,23 @@
+#summary Locale settings to use for each Windows language
+
+==Introduction==
+
+Windows and Linux don't work the same. That should not be a secret for anyone who has used both. Part of the challenge in getting Wine to display text in Windows software correctly is to find out which encoding it uses. Sometimes this is easy, and sometimes it is not.
+
+A list of encodings known so far and supported in !WineLocale is available in the following table.
+
+==Locale Equivalents==
+
+||Language||Linux Locale||Supported||
+||Arabic  ||ar_SA.ISO-8859-6 ISO-8859-6||Yes||
+||Chinese ||zh_CN GB2312               ||Yes||
+||Chinese ||zh_CN.GB18030 GB18030      ||Yes||
+||Chinese ||zh_TW Big5                 ||Yes||
+||English ||en_US.UTF-8 UTF-8          ||Yes||
+||Greek   ||el_GR.ISO-8859-7 ISO-8859-7||Yes||
+||Hebrew  ||he_IL.ISO-8859-8 ISO-8859-8||Yes||
+||Japanese||ja_JP SJIS                 ||Yes||
+||Japanese||ja_JP.EUC-JP EUC-JP        ||Yes||
+||Korean  ||ko_KR.EUC-KR EUC-KR        ||Yes||
+||Russian ||ru_RU.ISO-8859-5 ISO-8859-5||Yes||
+||Russian ||ru_UA.ISO-8859-5 ISO-8859-5||Yes||
