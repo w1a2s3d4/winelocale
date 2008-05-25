@@ -46,4 +46,4 @@ Assuming the code page you need to add is not shown above, the next step will be
 
 ==Adding a Code Page==
 
-First thing is first: you need to know which code page to add. If this is for !WineLocale or Wine in general, it would be a good idea to check [[Locale Equivalents for Windows Languages]] to find out which code page you must add.
+First thing is first: you need to know which code page to add. If this is for !WineLocale or Wine in general, it would be a good idea to check [LocaleEquivalentsForWindowsLanguages Locale Equivalents for Windows Languages] to find out which code page you must add.
