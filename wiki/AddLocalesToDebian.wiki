@@ -78,4 +78,4 @@ This should print out a lot of information, and hopefully a "done" for each new 
 
 ==Errors==
 
-None known. Update this Wiki page if you encounter any trouble!
+None known. Comment on this page if you encounter any trouble!
