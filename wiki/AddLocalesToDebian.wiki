@@ -46,7 +46,7 @@ Assuming the code page you need to add is not shown above, the next step will be
 
 ==Adding a Code Page==
 
-First thing is first: you need to know which code page to add. If this is for !WineLocale or Wine in general, it would be a good idea to check LocaleEquivalentsForWindowsLanguages to find out which code page you must add.
+First thing is first: you need to know which code page to add. If this is for !WineLocale or Wine in general, it would be a good idea to check [LocaleEquivalentsForWindowsLanguages] to find out which code page you must add.
 
 Debian stores its locale settings in /var/lib/locales/supported.d. There is one file for each available language, each named using the two letter codes specified in the [http://www.loc.gov/standards/iso639-2/php/English_list.php ISO 639-2] standard. If the file for your language does not exist yet, you must create it.
 
