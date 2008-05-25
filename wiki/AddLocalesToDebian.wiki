@@ -1,13 +1,49 @@
 #summary How to add locale code pages to Debian or Ubuntu systems
 
-= Introduction =
+==Introduction==
 
-Stuff.
+Generally, Debian, and especially its cousin Ubuntu, attempt to make using Linux as easy as possible. Nearly anything a user could want to do can be accomplished through supplied interface or through apt.
 
+While both maintain language support packages, these packages center on Unicode -- specifically UTF-8 -- encodings and most packages will not provide the other code pages on which Windows applications depend.
 
-= Details =
+Unfortunately, this leaves the end user to bash the system until necessary code pages become available: no easy task since no one anywhere has ever bothered to write how this works.
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+Assuming you are installing !WineLocale from its supplied Debian package, these steps will be handled for you. However, if you are one of those truly distrustful users who will trust an author's software but not his package, then these steps may be for you.
+
+==Querying Locales==
+
+Before attempting to add new code pages to your system locales, it is a good idea to make sure you do not already have said code page installed. The command to display all currently installed locales is:
+
+{{{
+locale -a
+}}}
+
+This command, when executed on a default install of Debian or Ubuntu, should display something similar to the following output:
+
+{{{
+d@cinnamon:~$ locale -a
+C
+en_AU.utf8
+en_BW.utf8
+en_CA.utf8
+en_DK.utf8
+en_GB.utf8
+en_HK.utf8
+en_IE.utf8
+en_IN
+en_NZ.utf8
+en_PH.utf8
+en_SG.utf8
+en_US.utf8
+en_ZA.utf8
+en_ZW.utf8
+POSIX
+}}}
+
+That's really useful if we speak English, but even installing extra language packs will not add anything more than "ja_JP.utf8". Great for word processing, browsing or displaying Japanese localizations of software, but bad for displaying the text in pre-Unicode Windows software.
+
+Assuming the code page you need to add is not shown above, the next step will be to add it.
+
+==Adding a Code Page==
+
+First thing is first: you need to know which code page to add. If this is for !WineLocale or Wine in general, it would be a good idea to check [[Locale Equivalents for Windows Languages]] to find out which code page you must add.
