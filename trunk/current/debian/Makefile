@@ -9,6 +9,7 @@ all:
 
 # install the script
 install:
-	mkdir /usr/local/share/wineloc
-	cp -r ./src/* /usr/local/share/wineloc
-	ln -s /usr/local/bin/wineloc /usr/local/share/wineloc/wineloc.php
+	cp ../winelocale.py /usr/bin/winelocale.py
+	chmod 755 /usr/bin/winelocale.py
+	cp ../winelocale.svg /usr/share/pixmaps/winelocale.svg
+	
