@@ -277,6 +277,18 @@ REG_FONTCN    = "[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersio
 REG_FONTTW    = "[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\FontSubstitutes]\n" + \
                 "\"MS Shell Dlg\"=\"AR PL UMing TW\"\n\n"
 
+REG_MENUH     = "[HKEY_CURRENT_USER\Control Panel\Desktop\WindowMetrics]\n\"MenuHeight\"="
+
+REG_MENUW     = "[HKEY_CURRENT_USER\Control Panel\Desktop\WindowMetrics]\n\"MenuWidth\"="
+
+REG_METRICS   = {
+  "CaptionFont":   "[HKEY_CURRENT_USER\Control Panel\Desktop\WindowMetrics]\n\"CaptionFont\"=",
+  "MenuFont":      "[HKEY_CURRENT_USER\Control Panel\Desktop\WindowMetrics]\n\"MenuFont\"=",
+  "MessageFont":   "[HKEY_CURRENT_USER\Control Panel\Desktop\WindowMetrics]\n\"MessageFont\"=",
+  "SmCaptionFont": "[HKEY_CURRENT_USER\Control Panel\Desktop\WindowMetrics]\n\"SmCaptionFont\"=",
+  "StatusFont":    "[HKEY_CURRENT_USER\Control Panel\Desktop\WindowMetrics]\n\"StatusFont\"="
+  }
+
 '''
 -------------------------------------------------------------------------------
 Initialize fonts checklist to false
@@ -722,7 +734,6 @@ def get_logfont():
   while(len(hexstring) < 277):
     hexstring += "00,"
   hexstring += "00"
-  print hexstring
   return(0)
 
 '''
