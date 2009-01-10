@@ -69,8 +69,8 @@ DESCRIP = "WineLocale clones the functionality of Microsoft AppLocale in " + \
 WEBSITE = "http://code.google.com/p/winelocale/"
 CONFIG  = "user/.winelocalerc"
 PATH    = "winelocale"
-ICON    = PATH + "/winelocale.svg"
-LICENSE = PATH + "/LICENSE"
+ICON    = "winelocale.svg"
+LICENSE = "LICENSE"
 
 '''
 -------------------------------------------------------------------------------
@@ -375,6 +375,8 @@ class BaseForm:
     row3rows = gtk.VBox()
     self.chksmoothing = gtk.CheckButton("Enable font smoothing")
     row3rows.pack_start(self.chksmoothing, False, False)
+    self.chk120dpi = gtk.CheckButton("Enable 120dpi fonts (recommended for 96dpi Gnome)")
+    row3rows.pack_start(self.chk120dpi, False, False)
     self.chkshortcut = gtk.CheckButton("Create shortcut in ~/.local/bin")
     row3rows.pack_start(self.chkshortcut, False, False)
     row3.add(row3rows)
@@ -755,20 +757,14 @@ def set_logfont_from_gtk(pangofont):
 
 '''
 -------------------------------------------------------------------------------
-void get_config()
+void set_config()
 
 Populates globals from the config file.
 -------------------------------------------------------------------------------
 '''
-def get_config():
+def set_config():
   global LOGFONT, WINE_MENUBAR
-  LOGFONT["lfFaceName"] = pangofont.get_family()
-  if(pangofont.get_style() & pango.STYLE_ITALIC or pangofont.get_style() & pango.STYLE_OBLIQUE):
-    LOGFONT["lfItalic"] = 1
-  LOGFONT["lfWeight"] = pangofont.get_weight() + 0
-  LOGFONT["lfHeight"] = GTKTABLE_96[pangofont.get_size() / PANGO_SCALE][0]
-  WINE_MENUBAR = GTKTABLE_96[pangofont.get_size() / PANGO_SCALE][1]
-  LOGFONT["lfPitchAndFamily"] = VARIABLE_PITCH ^ FF_SWISS
+  
 
 
 '''
@@ -812,13 +808,13 @@ if(__name__ == "__main__"):
   
   if(len(args) > 0 and options.locale != None):
     if(os.path.exists(args[0]) and CODES.index(options.locale) != False):
-      shellwine(args[0], options.locale, options.msfonts)
+      shellwine(args[0], options.locale)
   
   else:
     if(options.locale != None):
       config.set("settings", "locale", str(CODES.index(options.locale)))
-    if(options.msfonts != None):
-      config.set("settings", "msfonts", "1")
+    #if(options.msfonts != None):
+    #  config.set("settings", "msfonts", "1")
     executable = None
     if(len(args) > 0):
       if(os.path.exists(args[0])):
