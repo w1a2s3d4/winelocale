@@ -42,7 +42,7 @@ POSSIBILITY OF SUCH DAMAGE.
 Python imports
 -------------------------------------------------------------------------------
 '''
-import os, pygtk, gtk, pango, ConfigParser
+import sys, os, pygtk, gtk, pango, ConfigParser
 pygtk.require('2.0')
 from optparse import OptionParser # handle config files
 from struct import pack           # int to binary
@@ -67,6 +67,7 @@ WEBSITE = "http://code.google.com/p/winelocale/"
 CONFIG  = os.environ["HOME"] + "/.winelocalerc"
 I18N    = "i18n"
 ICON    = "winelocale.svg"
+TEMP    = "/tmp"
 LICENSE = "LICENSE"
 
 '''
@@ -202,6 +203,9 @@ REGEDIT       = "REGEDIT4\n\n"
 
 REG_SET120DPI = "[HKEY_CURRENT_CONFIG\Software\Fonts]\n" + \
                 "\"LogPixels\"=dword:00000078\n\n"
+                
+REG_SET96DPI  = "[HKEY_CURRENT_CONFIG\Software\Fonts]\n" + \
+                "\"LogPixels\"=dword:00000060\n\n"
 
 REG_SMOOTHING = "[HKEY_CURRENT_USER\Control Panel\Desktop]\n" + \
                 "\"FontSmoothing\"=\"2\"\n" + \
@@ -210,13 +214,13 @@ REG_SMOOTHING = "[HKEY_CURRENT_USER\Control Panel\Desktop]\n" + \
                 "\"FontSmoothingType\"=dword:00000002\n\n"
 
 REG_FONTLINK  = "[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\FontLink\SystemLink]\n" + \
-                "\"Bitstream Vera Sans\"=str(7):\"kochi-gothic-subst.ttf,Kochi Gothic\\0uming.ttc,AR PL UMing\\0UnDotum.ttf,UnDotum\\0\"\n" + \
-                "\"Bitstream Vera Serif\"=str(7):\"kochi-mincho-subst.ttf,Kochi Mincho\\0ukai.ttc,AR PL UKai\\0UnBatang.ttf,UnBatang\\0\"\n" + \
-                "\"Lucida Sans Unicode\"=str(7):\"kochi-gothic-subst.ttf,Kochi Gothic\\0\"\n" + \
-                "\"Microsoft Sans Serif\"=str(7):\"VeraSe.ttf,Bitstream Vera Sans\\0kochi-gothic-subst.ttf,Kochi Gothic\\0uming.ttc,AR PL UMing\\0UnDotum.ttf,UnDotum\\0\"\n" + \
-                "\"MS PGothic\"=str(7):\"VeraSe.ttf,Bitstream Vera Sans\\0\"\n" + \
-                "\"MS UI Gothic\"=str(7):\"VeraSe.ttf,Bitstream Vera Sans\\0kochi-gothic-subst.ttf,Kochi Gothic\\0\"\n" + \
-                "\"Tahoma\"=str(7):\"VeraSe.ttf,Bitstream Vera Sans\\0kochi-gothic-subst.ttf,Kochi Gothic\\0uming.ttc,AR PL UMing\\0UnDotum.ttf,UnDotum\\0\"\n\n"
+                "\"Bitstream Vera Sans\"=hex(7):6b,6f,63,68,69,2d,67,6f,74,68,69,63,2d,73,75,62,73,74,2e,74,74,66,2c,4b,6f,63,68,69,20,47,6f,74,68,69,63,00,75,6d,69,6e,67,2e,74,74,63,2c,41,52,20,50,4c,20,55,4d,69,6e,67,00,55,6e,44,6f,74,75,6d,2e,74,74,66,2c,55,6e,44,6f,74,75,6d,00,00\n" + \
+                "\"Bitstream Vera Serif\"=hex(7):6b,6f,63,68,69,2d,6d,69,6e,63,68,6f,2d,73,75,62,73,74,2e,74,74,66,2c,4b,6f,63,68,69,20,4d,69,6e,63,68,6f,00,75,6b,61,69,2e,74,74,63,2c,41,52,20,50,4c,20,55,4b,61,69,00,55,6e,42,61,74,61,6e,67,2e,74,74,66,2c,55,6e,42,61,74,61,6e,67,00,00\n" + \
+                "\"Lucida Sans Unicode\"=hex(7):6b,6f,63,68,69,2d,67,6f,74,68,69,63,2d,73,75,62,73,74,2e,74,74,66,2c,4b,6f,63,68,69,20,47,6f,74,68,69,63,00,00\n" + \
+                "\"Microsoft Sans Serif\"=hex(7):56,65,72,61,53,65,2e,74,74,66,2c,42,69,74,73,74,72,65,61,6d,20,56,65,72,61,20,53,61,6e,73,00,6b,6f,63,68,69,2d,67,6f,74,68,69,63,2d,73,75,62,73,74,2e,74,74,66,2c,4b,6f,63,68,69,20,47,6f,74,68,69,63,00,75,6d,69,6e,67,2e,74,74,63,2c,41,52,20,50,4c,20,55,4d,69,6e,67,00,55,6e,44,6f,74,75,6d,2e,74,74,66,2c,55,6e,44,6f,74,75,6d,00,00\n" + \
+                "\"MS PGothic\"=hex(7):56,65,72,61,53,65,2e,74,74,66,2c,42,69,74,73,74,72,65,61,6d,20,56,65,72,61,20,53,61,6e,73,00,00\n" + \
+                "\"MS UI Gothic\"=hex(7):56,65,72,61,53,65,2e,74,74,66,2c,42,69,74,73,74,72,65,61,6d,20,56,65,72,61,20,53,61,6e,73,00,6b,6f,63,68,69,2d,67,6f,74,68,69,63,2d,73,75,62,73,74,2e,74,74,66,2c,4b,6f,63,68,69,20,47,6f,74,68,69,63,00,00\n" + \
+                "\"Tahoma\"=hex(7):56,65,72,61,53,65,2e,74,74,66,2c,42,69,74,73,74,72,65,61,6d,20,56,65,72,61,20,53,61,6e,73,00,6b,6f,63,68,69,2d,67,6f,74,68,69,63,2d,73,75,62,73,74,2e,74,74,66,2c,4b,6f,63,68,69,20,47,6f,74,68,69,63,00,75,6d,69,6e,67,2e,74,74,63,2c,41,52,20,50,4c,20,55,4d,69,6e,67,00,55,6e,44,6f,74,75,6d,2e,74,74,66,2c,55,6e,44,6f,74,75,6d,00,00\n\n"
 
 REG_FONTSUBS  = "[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\FontSubstitutes]\n" + \
                 "\"Arial\"=\"Bitstream Vera Sans\"\n" + \
@@ -232,7 +236,6 @@ REG_FONTSUBS  = "[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersio
                 "\"MS Mincho\"=\"Kochi Mincho\"\n" + \
                 "\"MS PGothic\"=\"Kochi Gothic\"\n" + \
                 "\"MS PMincho\"=\"Kochi Mincho\"\n" + \
-                "\"MS Shell Dlg\"=\"Bitstream Vera Sans\"\n" + \
                 "\"MS Shell Dlg 2\"=\"Bitstream Vera Sans\"\n" + \
                 "\"MS UI Gothic\"=\"Bitstream Vera Sans\"\n" + \
                 "\"PMingLiU\"=\"AR PL UMing TW\"\n" + \
@@ -296,7 +299,7 @@ LOGFONT = {
   "lfItalic":         0,
   "lfUnderline":      0,
   "lfStrikeOut":      0,
-  "lfCharSet":        0,
+  "lfCharSet":        DEFAULT_CHARSET,
   "lfOutPrecision":   0,
   "lfClipPrecision":  0,
   "lfQuality":        0,
@@ -326,17 +329,7 @@ LOCALES = {
   "zh_TW": ("中文(繁體)", "zh_TW.UTF-8"),
   }
 
-LOCALE_TOGGLE = {
-  #"ar_AR": False,
-  #"el_GR": False,
-  "en_US": True,
-  #"he_IL": False,
-  "ja_JP": False,
-  "ko_KR": False,
-  "ru_RU": True,
-  "zh_CN": False,
-  "zh_TW": False,
-  }
+LOCALES_LIST = None
 
 '''
 -------------------------------------------------------------------------------
@@ -368,8 +361,10 @@ class BaseForm:
     row1opts.set_spacing(5)
     self.txtfile = gtk.Entry()
     row1opts.pack_start(self.txtfile, True, True)
-    self.btnfile = gtk.Button(STRINGS.get("gui", "btnfile"), gtk.STOCK_OPEN)
+    self.btnfile = gtk.Button("Open", gtk.STOCK_OPEN)
     self.btnfile.set_size_request(90, -1)
+    self.btnfile.set_label(STRINGS.get("gui", "btnfile"))
+    self.btnfile.set_image(gtk.image_new_from_stock(gtk.STOCK_OPEN, gtk.ICON_SIZE_MENU))
     row1opts.pack_start(self.btnfile, False, False)
     row1.pack_start(row1opts, False, False)
     self.box.pack_start(row1, False, False)
@@ -399,14 +394,20 @@ class BaseForm:
     # Row 4
     row4 = gtk.HBox()
     row4.set_spacing(5)
-    self.btnhelp = gtk.Button(STRINGS.get("gui", "btnhelp"), gtk.STOCK_HELP)
+    self.btnhelp = gtk.Button("Help", gtk.STOCK_HELP)
+    self.btnhelp.set_label(STRINGS.get("gui", "btnhelp"))
+    self.btnhelp.set_image(gtk.image_new_from_stock(gtk.STOCK_HELP, gtk.ICON_SIZE_MENU))
     self.btnhelp.set_size_request(90, -1)
     row4.pack_start(self.btnhelp, False, False)
     row4.pack_start(gtk.Label(""), True, True)
-    self.btnclose = gtk.Button(STRINGS.get("gui", "btnclose"), gtk.STOCK_CLOSE)
+    self.btnclose = gtk.Button("Close", gtk.STOCK_CLOSE)
+    self.btnclose.set_label(STRINGS.get("gui", "btnclose"))
+    self.btnclose.set_image(gtk.image_new_from_stock(gtk.STOCK_CLOSE, gtk.ICON_SIZE_MENU))
     self.btnclose.set_size_request(90, -1)
     row4.pack_start(self.btnclose, False, False)
-    self.btnexecute = gtk.Button(STRINGS.get("gui", "btnexecute"), gtk.STOCK_EXECUTE)
+    self.btnexecute = gtk.Button("Execute", gtk.STOCK_EXECUTE)
+    self.btnexecute.set_label(STRINGS.get("gui", "btnexecute"))
+    self.btnexecute.set_image(gtk.image_new_from_stock(gtk.STOCK_EXECUTE, gtk.ICON_SIZE_MENU))
     self.btnexecute.set_size_request(90, -1)
     row4.pack_start(self.btnexecute, False, False)
     self.box.pack_start(row4, False, False)
@@ -419,6 +420,7 @@ class BaseForm:
     set_logfont_from_gtk(context.get_font_description())
     
     # Populate the locales drop-down
+    global LOCALES_LIST
     LOCALES_LIST = get_locales()
     for s in LOCALES_LIST:
       self.cmblocales.append_text(s[0])
@@ -500,8 +502,14 @@ class BaseForm:
       self.txtfile.set_text(dialog.get_filename())
     dialog.destroy()
   
+  '''
+  void click_website()
+  
+  Shells open the default browser to the WineLocale page.
+  '''
   def click_website(self, dialog, link, data = None):
-        url_show(link)
+    url_show(link)
+        
   '''
   void about()
   
@@ -557,7 +565,7 @@ class BaseForm:
     self.window.hide()
     
     # Update settings
-    global DEFAULT_LOCALE, USE_SMOOTHING, USE_HIDPIFONT, USE_SHORTCUT
+    global DEFAULT_LOCALE, DEFAULT_EXE, USE_SMOOTHING, USE_HIDPIFONT, USE_SHORTCUT
     if(self.chkshortcut.get_active() == True):
       USE_SHORTCUT = True
     else:
@@ -570,14 +578,11 @@ class BaseForm:
       USE_HIDPIFONT = True
     else:
       USE_HIDPIFONT = False
-    DEFAULT_LOCALE = self.cmblocales.get_active()
+    DEFAULT_LOCALE = LOCALES_LIST[self.cmblocales.get_active()][1][0:5]
+    DEFAULT_EXE    = self.txtfile.get_text()
+    set_config()
     
-    configfp = open(CONFIG, "w+")
-    config.write(configfp)
-    configfp.close()
-    
-    shellwine(self.txtfile.get_text(), CODES[self.cmblocales.get_active()], \
-              self.chkmsfonts.get_active())
+    shellwine()
     
     gtk.main_quit()
   
@@ -684,20 +689,20 @@ Updates globals with present system fonts.
 -------------------------------------------------------------------------------
 '''
 def set_fonts(fonts):
-  global HAS_BATANG, HAS_DOTUM, HAS_UMINGT, HAS_UMINGC, HAS_KGOTH, HAS_KMIN
+  global HAVE_FONTS
   for font in fonts:
     if font.get_name() == 'UnBatang':
-      HAS_BATANG = True
+      HAVE_FONTS["UnBatang"] = True
     elif font.get_name() == 'UnDotum':
-      HAS_DOTUM  = True
+      HAVE_FONTS["UnDotum"]  = True
     elif font.get_name() == 'AR PL UMing TW':
-      HAS_UMINGT = True
+      HAVE_FONTS["AR PL UMing TW"] = True
     elif font.get_name() == 'AR PL UMing CN':
-      HAS_UMINGC = True
+      HAVE_FONTS["AR PL UMing CN"] = True
     elif font.get_name() == 'Kochi Gothic':
-      HAS_KGOTH  = True
+      HAVE_FONTS["Kochi Gothic"]  = True
     elif font.get_name() == 'Kochi Mincho':
-      HAS_KMIN   = True
+      HAVE_FONTS["Kochi Mincho"]   = True
 
 '''
 -------------------------------------------------------------------------------
@@ -725,6 +730,20 @@ typedef struct tagLOGFONT {
 -------------------------------------------------------------------------------
 '''
 def get_logfont():
+  global LOGFONT
+  if(DEFAULT_LOCALE == "en_US"):
+    LOGFONT["lfCharSet"] = ANSI_CHARSET
+  elif(DEFAULT_LOCALE == "ru_RU"):
+    LOGFONT["lfCharSet"] = ANSI_CHARSET
+  elif(DEFAULT_LOCALE == "ja_JP"):
+    LOGFONT["lfCharSet"] = SHIFTJIS_CHARSET
+  elif(DEFAULT_LOCALE == "ko_KR"):
+    LOGFONT["lfCharSet"] = HANGUL_CHARSET
+  elif(DEFAULT_LOCALE == "zh_CN"):
+    LOGFONT["lfCharSet"] = GB2312_CHARSET
+  elif(DEFAULT_LOCALE == "zh_TW"):
+    LOGFONT["lfCharSet"] = CHINESEBIG5_CHARSET
+  
   # Make sure we don't go over 32 character with the \0
   tempfont = LOGFONT["lfFaceName"]
   tempfon2 = ""
@@ -734,8 +753,8 @@ def get_logfont():
   for i in range(0, len(tempfont)):
     tempfon2 += tempfont[i:i+1] + "\0"
   # Make the binary string
-  newstring = pack("<lllllbbbbbbbb",
-                LOGFONT["lfHeight"] * -1, \
+  newstring = pack("<lllllBBBBBBBB",
+                GTKTABLE_96[LOGFONT["lfHeight"]][0] * -1, \
                 LOGFONT["lfWidth"], \
                 LOGFONT["lfEscapement"], \
                 LOGFONT["lfOrientation"], \
@@ -762,7 +781,7 @@ def get_logfont():
   while(len(hexstring) < 277):
     hexstring += "00,"
   hexstring += "00"
-  return(0)
+  return(hexstring)
 
 '''
 -------------------------------------------------------------------------------
@@ -777,7 +796,7 @@ def set_logfont_from_gtk(pangofont):
   if(pangofont.get_style() & pango.STYLE_ITALIC or pangofont.get_style() & pango.STYLE_OBLIQUE):
     LOGFONT["lfItalic"] = 1
   LOGFONT["lfWeight"] = pangofont.get_weight() + 0
-  LOGFONT["lfHeight"] = GTKTABLE_96[pangofont.get_size() / PANGO_SCALE][0]
+  LOGFONT["lfHeight"] = pangofont.get_size() / PANGO_SCALE
   WINE_MENUBAR = GTKTABLE_96[pangofont.get_size() / PANGO_SCALE][1]
   LOGFONT["lfPitchAndFamily"] = VARIABLE_PITCH ^ FF_SWISS
 
@@ -824,7 +843,7 @@ void set_config()
 Wipes the config file and populates it with default values.
 -------------------------------------------------------------------------------
 '''
-def reset_config():
+def set_config():
   configfp = open(CONFIG,'w')
   config = ConfigParser.ConfigParser()
   config.add_section("settings")
@@ -833,7 +852,7 @@ def reset_config():
   config.set("settings", "gtkfontname", LOGFONT["lfFaceName"])
   config.set("settings", "gtkfontsize", str(LOGFONT["lfHeight"]))
   config.set("settings", "gtkfontweight", str(LOGFONT["lfWeight"]))
-  config.set("settings", "gtkfontitalic", str(LOGFONT["lfItalic"]))
+  config.set("settings", "gtkfontitalic", str(int(LOGFONT["lfItalic"])))
   config.set("settings", "shortcut", str(int(USE_SHORTCUT)))
   config.set("settings", "smoothing", str(int(USE_SMOOTHING)))
   config.set("settings", "hidpifont", str(int(USE_HIDPIFONT)))
@@ -845,7 +864,58 @@ def reset_config():
   config.set("settings", "has_kmin", str(int(HAVE_FONTS["Kochi Mincho"])))
   config.write(configfp)
   configfp.close()
+
+'''
+-------------------------------------------------------------------------------
+void generate_registry()
+
+Creates a registry patch based on all config settings in /tmp/winelocale.reg.
+-------------------------------------------------------------------------------
+'''
+def generate_registry():
+  registry = open(TEMP + "/winelocale.reg", "w")
   
+  # Registry file header
+  registry.write(REGEDIT)
+  
+  # WineLocale font core
+  registry.write(REG_FONTLINK)
+  registry.write(REG_FONTSUBS)
+  
+  # Write an appropriate Shell Dlg font for the locale
+  if(DEFAULT_LOCALE == "en_US" or DEFAULT_LOCALE == "ru_RU"):
+    registry.write(REG_PATCHDLG["ANSI"])
+  elif(DEFAULT_LOCALE == "ja_JP"):
+    registry.write(REG_PATCHDLG["SHIFTJIS"])
+  elif(DEFAULT_LOCALE == "ko_KR"):
+    registry.write(REG_PATCHDLG["HANGUL"])
+  elif(DEFAULT_LOCALE == "zh_CN"):
+    registry.write(REG_PATCHDLG["GB2312"])
+  elif(DEFAULT_LOCALE == "zh_TW"):
+    registry.write(REG_PATCHDLG["CHINESEBIG5"])
+    
+  # Write the window metrics fonts
+  registry.write(REG_METRICS["CaptionFont"] + get_logfont() + "\n\n")
+  registry.write(REG_METRICS["MenuFont"] + get_logfont() + "\n\n")
+  registry.write(REG_METRICS["MessageFont"] + get_logfont() + "\n\n")
+  registry.write(REG_METRICS["SmCaptionFont"] + get_logfont() + "\n\n")
+  registry.write(REG_METRICS["StatusFont"] + get_logfont() + "\n\n")
+  
+  # Fix the menubar height
+  registry.write(REG_MENUH + "\"" + str(GTKTABLE_96[LOGFONT["lfHeight"]][1]) + "\"\n\n")
+  registry.write(REG_MENUW + "\"" + str(GTKTABLE_96[LOGFONT["lfHeight"]][1]) + "\"\n\n")
+  
+  # Write/remove smoothing
+  
+  
+  # Write/remove 120dpi
+  if(USE_HIDPIFONT == True):
+    registry.write(REG_SET120DPI)
+  else:
+    registry.write(REG_SET96DPI)
+  
+  registry.close()
+  return(None)
 
 '''
 -------------------------------------------------------------------------------
@@ -854,21 +924,17 @@ int shellwine()
 Prepares the registry and shells Wine. This function will always return int 0.
 -------------------------------------------------------------------------------
 '''
-def shellwine(executable, locale, msfonts = False):
-  global CODES, LANG
+def shellwine():
   storelang = os.environ['LANG']
   os.environ['WINEDEBUG'] = "-all"
-  fonts = "common"
-  os.system("wine regedit.exe \"" + PATH + "/" + fonts + "/" + locale + \
-            ".reg\" > /dev/null")
-  exe = "Z:\\" + executable.replace("/", "\\")
-  os.environ['LANG'] = LANG[CODES.index(locale)]
+  generate_registry()
+  os.system("wine regedit.exe /tmp/winelocale.reg > /dev/null")
+  exe = "Z:\\" + DEFAULT_EXE.replace("/", "\\")
+  os.environ['LANG'] = LOCALES[DEFAULT_LOCALE][1]
   os.system("wine \"" + exe + "\" > /dev/null")
   os.environ['LANG'] = storelang
-  os.system("wine regedit.exe \"" + PATH + "/remove/" + locale + \
-            ".reg\" > /dev/null")
+  os.system("wine regedit.exe /tmp/winelocale.reg > /dev/null")
   return(0)
-
 
 '''
 -------------------------------------------------------------------------------
@@ -880,7 +946,7 @@ Collect configuration data
 try:
   configfp = open(CONFIG,'r')
 except IOError:
-  reset_config()
+  set_config()
   configfp = open(CONFIG,'r')
 configfp.close()
 get_config()
@@ -908,14 +974,15 @@ if(__name__ == "__main__"):
   
   else:
     if(options.locale != None):
-      config.set("settings", "locale", str(CODES.index(options.locale)))
-    #if(options.msfonts != None):
-    #  config.set("settings", "msfonts", "1")
-    executable = None
+      DEFAULT_LOCALE = options.locale
     if(len(args) > 0):
       if(os.path.exists(args[0])):
-        executable = args[0]
+        DEFAULT_EXE = args[0]
     
     base = BaseForm()
-    base.main()
+    try:
+      base.main()
+    except KeyboardInterrupt:
+      print "\nReceived KeyboardInterrupt ... terminating"
+      sys.exit()
 

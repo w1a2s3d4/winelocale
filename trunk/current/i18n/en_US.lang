@@ -1,3 +1,8 @@
+[credits]
+translator = Derrick Sobodash
+language = English
+revision = 0.6.1
+
 [cli]
 usage = %prog [options] EXECUTABLE
 optlocale = specify a locale in which to load the target executable
@@ -5,10 +10,10 @@ optlocale = specify a locale in which to load the target executable
 [gui]
 lblinstruct1 = Select a portable executable (PE) file:
 lblinstruct2 = Select a system language:
-btnfile = Open
-btnhelp = Help
-btnclose = Close
-btnexecute = Execute
+btnfile = _Open
+btnhelp = _Help
+btnclose = _Close
+btnexecute = _Execute
 chksmoothing = Enable font smoothing
 chk120dpi = Enable 120dpi fonts (use if on 96dpi X)
 chkshortcut = Create shortcut in ~/.local/bin
