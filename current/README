@@ -1,29 +1,32 @@
 ------------------------------------------------------------------------------
- WineLocale                                                     version 1.0.1
+ WineLocale                                                     version 0.6.1
  By Derrick Sobodash
- Released on December 25, 2007                     http://cinnamonpirate.com/
+ Released on ?? ??, 2009                 http://code.google.com/p/winelocale/
 ------------------------------------------------------------------------------
 
  INFORMATION
 
- Mysteriously, the Wine project has always ignored the needs of international
- users, instead focusing on how to squeeze more frames per second out of
- [Game of the Year Here]. However, for those of us needing general
- application support, we've been left mostly to our own devices.
+ Mysteriously, the Wine project has ignored the needs of international users,
+ instead focusing on how to squeeze more frames per second out of
+ [Game of the Year Here]. Those of us needing general application support
+ have been left to our own devices.
  
  The Wine mailing lists only say to change the LANG environment variable to
- switch the language Wine runs in. That's all good and fine, but it does
- nothing to solve the massive font problems involved in running Windows in
- other locales.
+ switch the language in which Wine runs. That's good and well, but it does
+ nothing to solve massive font compatibility problems stemming from Wine's
+ total lack of support for Microsoft's FontLink, the glue which holds Unicode
+ together in Windows software.
  
- The solution to this problem is WineLocale, a PHP-GTK powered script which
- can act like AppLocale by Microsoft. It allows you to launch an application
- in any locale you want with all fonts in tact. The only question left is
- whether or not Wine even supports your application.
+ The solution to this problem is WineLocale, a Python script which is
+ designed to immitate Microsoft's AppLocale. It allows the user to launch an
+ application in any locale with all fonts in tact. Of course, it cannot fix
+ software that is completely borked by Wine to begin with.
  
- WineLocale can also export shell scripts to automatically launch the
- application in the desired locale. These are stored to ~/.local/bin, so you
- will need to add this to your PATH environment variable.
+ It also takes care of a longstanding, pesty menubar problem that has been
+ in Wine since time immemorial. WineLocale will read your Gtk settings and
+ hack Wine's menubar and font display settings to match--almost. You will
+ still have to match up your Gtk color using WineCfg. WineLocale also
+ includes options to set 120dpi fonts and enable (limited) font smoothing.
 
 ------------------------------------------------------------------------------
 
@@ -37,14 +40,13 @@
  LICENSE
 
  The original WineLocale shell script (WineLocale0) was released under the
- GNU GPL. The PHP rewrite has been developed under the BSD License. As the
- original was written in DASH script and this implementation is in PHP, it
+ GNU GPL. The Python rewrite has been developed under the BSD License. As the
+ original was written in DASH script and this implementation is in Python, it
  would be hard to claim it shares any code with the original.
  
  If you must have a GPL-based WineLocale, please go to the archive and get
  the final release of WineLocale0. You are free to modify it in any way you
- so choose, and even to fork it to a new project. This line is terminated,
- and I will only maintain WineLocale1.
+ so choose, and even to fork it to a new project.
 
 ------------------------------------------------------------------------------
 
