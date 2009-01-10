@@ -1,0 +1,31 @@
+[cli]
+usage = %prog [options] EXECUTABLE
+optlocale = specify a locale in which to load the target executable
+
+[gui]
+lblinstruct1 = Select a portable executable (PE) file:
+lblinstruct2 = Select a system language:
+btnfile = Open
+btnhelp = Help
+btnclose = Close
+btnexecute = Execute
+chksmoothing = Enable font smoothing
+chk120dpi = Enable 120dpi fonts (use if on 96dpi X)
+chkshortcut = Create shortcut in ~/.local/bin
+expander = Extended options:
+
+[file]
+title = Open File
+exefilter = Portable executable
+allfilter = All files
+
+[about]
+comments = WineLocale is a lightweight locale changer for executing applications with Wine
+
+[dialogs]
+errortitle = Flagrant System Error!
+noexe1 = You have not supplied the path to an executable file.
+noexe2 = Please click the Open button and browse to select a file.
+exenotfound1 = The system was unable to find the executable you specified.
+exenotfound2 = Please check that the supplied path is correct and try again.
+
