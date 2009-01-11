@@ -1,0 +1,37 @@
+[credits]
+translator = gamer_boy
+revisor = tvtoon
+language = Português do Brasil
+revision = 0.6.1
+
+[cli]
+usage = %prog [opções] EXECUTABLE
+optlocale = Especifique o idioma para utilizar no executável escolhido.
+
+[gui]
+lblinstruct1 = Escolha o arquivo executável portável(PE) :
+lblinstruct2 = Escolha a linguagem do sistema:
+btnfile = _Abrir
+btnhelp = _Ajuda
+btnclose = _Fechar
+btnexecute = _Executar
+chksmoothing = Ativar fonte limpa
+chk120dpi = Ativar Fonte 120dpi (utilizar se o X estiver em 96dpi) 
+chkshortcut = Criar atalho em ~/.local/bin
+expander = Opções:
+
+[file]
+title = Abrir Arquivo
+exefilter = Executável portável
+allfilter = Todos os arquivos
+
+[about]
+comments = WineLocale é um leve alterador de idiomas para aplicativos executáveis para o Wine
+
+[dialogs]
+errortitle = Erro Fatal do Sistema!
+noexe1 = Você não informou um caminho para o arquivo executável.
+noexe2 = Por favor, clique no botão Abrir e escolha o arquivo.
+exenotfound1 = O sistema não foi capaz de achar o arquivo executável que você especificou.
+exenotfound2 = Por favor, verifique se o caminho está correto e tente novamente.
+
