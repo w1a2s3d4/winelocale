@@ -1,0 +1,36 @@
+[credits]
+translator = Alejandro Moreno
+language = Español
+revision = 0.6.1
+
+[cli]
+usage = %prog [opciones] EJECUTABLE
+optlocale = carga el ejecutable con la localidad indicada
+
+[gui]
+lblinstruct1 = Seleccione un archivo ejecutable portátil (extensión .exe, .dll, .ocx, .sys, .scr):
+lblinstruct2 = Seleccione el lenguaje del sistema:
+btnfile = _Abrir
+btnhelp = A_yuda
+btnclose = _Cerrar
+btnexecute = _Ejecutar
+chksmoothing = Activar el suavizado de fuentes
+chk120dpi = Activar fuentes de 120dpi (úsese si X tiene 96dpi)
+chkshortcut = Crear acceso directo en ~/.local/bin
+expander = Más opciones:
+
+[file]
+title = Abrir archivo
+exefilter = Ejecutable portátil
+allfilter = Todos los archivos
+
+[about]
+comments = WineLocale es una aplicación ligera que permite cambiar la localidad del sistema al ejecutar aplicaciones en Wine
+
+[dialogs]
+errortitle = Flagrante Error de Sistema!
+noexe1 = No ha seleccionado una ruta a un archivo ejecutable.
+noexe2 = Por favor haga click en el botón Abrir y seleccione un archivo.
+exenotfound1 = El sistema no pudo encontrar el ejecutable indicado.
+exenotfound2 = Por favor asegúrese que la ruta de archivo es correcta e inténtelo de nuevo.
+

@@ -1,0 +1,37 @@
+[credits]
+translator = Daniele Dell'Erba
+language = Italiano
+revision = 0.6.1
+
+[cli]
+usage = %prog [options] EXECUTABLE
+optlocale = specifica il locale nel quale verrà caricato l'eseguibile
+
+[gui]
+lblinstruct1 = Seleziona file eseguibile portabile (PE):
+lblinstruct2 = Seleziona lingua di sistema:
+btnfile = _Apri
+btnhelp = _Guida
+btnclose = _Chiudi
+btnexecute = _Esegui
+chksmoothing = Abilita arrotondamento font
+chk120dpi = Abilita font a 120dpi
+chkshortcut = Crea collegamento in ~/.local/bin
+expander = Opzioni estese:
+
+[file]
+title = Apri File
+exefilter = Eseguibile Portabile
+allfilter = Tutti i File
+
+[about]
+comments = WineLocale è selettore di locale per eseguire applicazioni
+con Wine, veloce e leggero.
+
+[dialogs]
+errortitle = Errore di Sistema.
+noexe1 = Non hai specificato il percorso ad un file eseguibile.
+noexe2 = Seleziona un file tramite il tasto Apri.
+exenotfound1 = File eseguibile non trovato.
+exenotfound2 = Controlla che il percorso specificato sia corretto.
+
