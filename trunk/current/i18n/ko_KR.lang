@@ -1,0 +1,36 @@
+[credits]
+translator = Tong Pa Jung
+language = 한국어
+revision = 0.6.1
+
+[cli]
+usage = %prog [options] 실행파일
+optlocale = specify a locale in which to load the target executable
+
+[gui]
+lblinstruct1 = 휴대 실햏 파일 (PE) 선택:
+lblinstruct2 = 시스템 언어 선택:
+btnfile = _열기
+btnhelp = _도음말
+btnclose = _닫기
+btnexecute = _실행하다
+chksmoothing = 글꼴 다듬 사용
+chk120dpi = 120dpi 글꼴 사용 (96dpi X 의믄 쓰세요)
+chkshortcut = ~/.local/bin 바로 가기 만들기 
+expander = 확장 옵션:
+
+[file]
+title = 파일 열기
+exefilter = 휴대 실햏 파일
+allfilter = 모든 파일
+
+[about]
+comments = WineLocale 은 Wine 의로 응용 프로그램 을 실햏하는 가벼운 locale changer 입니다
+
+[dialogs]
+errortitle = Flagrant 시스탬 오류!
+noexe1 = You have not supplied the path to an 실햏 파일.
+noexe2 = Please click the 열기 button and browse to 파일 선택.
+exenotfound1 = 시스탬 의 선택한 실햏 파일 찾을수 없습니다.
+exenotfound2 = Please check that the supplied path is correct and 다시해보세요
+

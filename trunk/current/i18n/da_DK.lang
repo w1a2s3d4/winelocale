@@ -1,0 +1,36 @@
+[credits]
+translator = Askrates
+language = Dansk
+revision = 0.6.1
+
+[cli]
+usage = %prog [funktion] EKSEKVERBART PROGRAM
+optlocale = Vælg et lokale til brug for det eksekverbare program
+
+[gui]
+lblinstruct1 = Vælg en Bærbar Eksekverbar (PE) fil:
+lblinstruct2 = Vælg systemsprog:
+btnfile = _Åbn
+btnhelp = _Hjælp
+btnclose = _Luk
+btnexecute = _Eksekver
+chksmoothing = Brug udglatning af skrifttyper
+chk120dpi = Brug 120dpi skrifttyper (vælg hvis X er 96dpi)
+chkshortcut = Opret genvej i ~/.local/bin
+expander = Udvidede funktioner:
+
+[file]
+title = Åbn fil
+exefilter = Bærbar eksekverbar fil
+allfilter = Alle filer
+
+[about]
+comments = WineLocale er et lætvægts program til at ændre lokale for at åbne programmer med Wine
+
+[dialogs]
+errortitle = System fejl!
+noexe1 = Du har ikke angivet en sti til den eksekverbare fil.
+noexe2 = Klik paa Åbn knappen og vælg en fil at åbne.
+exenotfound1 = Systemet kunne ikke finde den fil du har valgt.
+exenotfound2 = Kontroller stien til den eksekverbare fil og prøv igen.
+
