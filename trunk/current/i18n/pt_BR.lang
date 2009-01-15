@@ -11,8 +11,8 @@ optlocale = Especifique o idioma para utilizar no executável escolhido.
 [gui]
 lblinstruct1 = Escolha o arquivo executável portável(PE) :
 lblinstruct2 = Escolha a linguagem do sistema:
-btnfile = _Abrir
-btnhelp = _Ajuda
+bbtnfile = _Abrir
+btnhelp = a_Juda
 btnclose = _Fechar
 btnexecute = _Executar
 chksmoothing = Ativar fonte limpa
